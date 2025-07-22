@@ -18,10 +18,10 @@ const mockListing = {
   rating: 4.8,
   reviews: 156,
   images: [
-    '/placeholder-image.jpg',
-    '/placeholder-image.jpg',
-    '/placeholder-image.jpg',
-    '/placeholder-image.jpg'
+    'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg',
+    'https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg',
+    'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg',
+    'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg'
   ],
   type: 'Appartement entier',
   guests: 4,
@@ -38,7 +38,7 @@ const mockListing = {
   ],
   host: {
     name: 'Marie',
-    avatar: '/placeholder-avatar.jpg',
+    avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg',
     joinedDate: 'Juin 2020',
     reviews: 89
   }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import ListingCard from '@/components/ui/ListingCard';
 
@@ -10,7 +11,7 @@ const mockListings = [
     location: 'Paris, France',
     price: 120,
     rating: 4.8,
-    images: ['/placeholder-image.jpg'],
+    images: ['https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg'],
     type: 'Appartement entier'
   },
   {
@@ -19,7 +20,7 @@ const mockListings = [
     location: 'Nice, France',
     price: 250,
     rating: 4.9,
-    images: ['/placeholder-image.jpg'],
+    images: ['https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg'],
     type: 'Villa entière'
   },
   {
@@ -28,7 +29,7 @@ const mockListings = [
     location: 'Lyon, France',
     price: 80,
     rating: 4.6,
-    images: ['/placeholder-image.jpg'],
+    images: ['https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg'],
     type: 'Studio entier'
   },
   {
@@ -37,7 +38,7 @@ const mockListings = [
     location: 'Provence, France',
     price: 180,
     rating: 4.7,
-    images: ['/placeholder-image.jpg'],
+    images: ['https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg'],
     type: 'Maison entière'
   }
 ];
@@ -53,9 +54,11 @@ export default function Home() {
         <p className="text-xl mb-8">
           Découvrez des logements uniques et des expériences inoubliables
         </p>
-        <Button size="lg" variant="secondary">
-          Commencer à explorer
-        </Button>
+        <Link href="/search">
+          <Button size="lg" variant="secondary">
+            Commencer à explorer
+          </Button>
+        </Link>
       </section>
 
       {/* Search Section */}
@@ -85,7 +88,9 @@ export default function Home() {
               />
             </div>
             <div className="flex items-end">
-              <Button className="w-full">Rechercher</Button>
+              <Link href="/search" className="w-full">
+                <Button className="w-full">Rechercher</Button>
+              </Link>
             </div>
           </div>
         </div>

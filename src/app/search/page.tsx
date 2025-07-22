@@ -10,7 +10,7 @@ const mockSearchResults = [
     location: 'Paris, France',
     price: 120,
     rating: 4.8,
-    images: ['/placeholder-image.jpg'],
+    images: ['https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg'],
     type: 'Appartement entier'
   },
   {
@@ -19,7 +19,7 @@ const mockSearchResults = [
     location: 'Nice, France',
     price: 250,
     rating: 4.9,
-    images: ['/placeholder-image.jpg'],
+    images: ['https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg'],
     type: 'Villa entière'
   },
   {
@@ -28,7 +28,7 @@ const mockSearchResults = [
     location: 'Lyon, France',
     price: 80,
     rating: 4.6,
-    images: ['/placeholder-image.jpg'],
+    images: ['https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg'],
     type: 'Studio entier'
   },
   {
@@ -37,7 +37,7 @@ const mockSearchResults = [
     location: 'Provence, France',
     price: 180,
     rating: 4.7,
-    images: ['/placeholder-image.jpg'],
+    images: ['https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg'],
     type: 'Maison entière'
   },
   {
@@ -46,7 +46,7 @@ const mockSearchResults = [
     location: 'Marseille, France',
     price: 95,
     rating: 4.5,
-    images: ['/placeholder-image.jpg'],
+    images: ['https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg'],
     type: 'Loft entier'
   },
   {
@@ -55,7 +55,7 @@ const mockSearchResults = [
     location: 'Dordogne, France',
     price: 350,
     rating: 4.9,
-    images: ['/placeholder-image.jpg'],
+    images: ['https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg'],
     type: 'Château entier'
   }
 ];
