@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
+import FavoriteButton from '@/components/ui/FavoriteButton';
 import Image from 'next/image';
 
 interface ListingCardProps {
@@ -25,13 +26,14 @@ const ListingCard: React.FC<ListingCardProps> = ({
   return (
     <Link href={`/listings/${id}`}>
       <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
-        <div className="relative h-64">
+        <div className="relative h-64 group">
           <Image
             src={images[0] || 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg'}
             alt={title}
             fill
             className="object-cover"
           />
+          <FavoriteButton listingId={id} />
         </div>
         <CardContent className="p-4">
           <div className="flex justify-between items-start mb-2">

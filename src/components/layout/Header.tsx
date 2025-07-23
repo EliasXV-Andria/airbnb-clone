@@ -12,12 +12,23 @@ const Header = () => {
         Airbnb Clone
       </Link>
       <nav className="space-x-4">
-        <Button variant="ghost">Devenir hôte</Button>
+        <Link href="/host">
+          <Button variant="ghost">Devenir hôte</Button>
+        </Link>
         <Button variant="ghost">Expériences</Button>
         <Button variant="ghost">Aide</Button>
         {user ? (
           <div className="flex items-center space-x-4">
             <span className="text-sm">Bonjour, {user.firstName}</span>
+            <Link href="/bookings">
+              <Button variant="ghost" size="sm">Mes voyages</Button>
+            </Link>
+            <Link href="/favorites">
+              <Button variant="ghost" size="sm">Favoris</Button>
+            </Link>
+            <Link href="/profile">
+              <Button variant="outline">Mon profil</Button>
+            </Link>
             <Button variant="outline" onClick={logout}>
               Se déconnecter
             </Button>

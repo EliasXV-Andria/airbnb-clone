@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import ReviewCard from '@/components/ui/ReviewCard';
+import FavoriteButton from '@/components/ui/FavoriteButton';
 import Image from 'next/image';
 
 interface ListingDetailPageProps {
@@ -44,6 +46,28 @@ const mockListing = {
   }
 };
 
+// Mock reviews data
+const mockReviews = [
+  {
+    author: {
+      name: 'Sophie Martin',
+      avatar: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg'
+    },
+    rating: 5,
+    date: 'Mars 2024',
+    comment: 'Appartement magnifique et très bien situé ! Marie est une hôte formidable, très accueillante et disponible. Je recommande vivement !'
+  },
+  {
+    author: {
+      name: 'Thomas Dubois',
+      avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg'
+    },
+    rating: 4,
+    date: 'Février 2024',
+    comment: 'Très bon séjour dans cet appartement moderne. Tout était propre et conforme à la description. Parfait pour découvrir Paris !'
+  }
+];
+
 export default function ListingDetailPage({ params }: ListingDetailPageProps) {
   return (
     <div className="max-w-7xl mx-auto">
@@ -58,7 +82,7 @@ export default function ListingDetailPage({ params }: ListingDetailPageProps) {
 
       {/* Images Gallery */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="lg:col-span-2 lg:row-span-2">
+        <div className="lg:col-span-2 lg:row-span-2 relative">
           <div className="relative h-96 lg:h-full">
             <Image
               src={mockListing.images[0]}
@@ -66,6 +90,7 @@ export default function ListingDetailPage({ params }: ListingDetailPageProps) {
               fill
               className="object-cover rounded-lg"
             />
+            <FavoriteButton listingId={params.id} className="top-4 right-4" />
           </div>
         </div>
         {mockListing.images.slice(1, 4).map((image, index) => (
@@ -136,6 +161,18 @@ export default function ListingDetailPage({ params }: ListingDetailPageProps) {
               </div>
             </CardContent>
           </Card>
+
+          {/* Reviews Section */}
+          <div className="mt-8">
+            <h3 className="text-xl font-semibold mb-6">
+              ⭐ {mockListing.rating} · {mockListing.reviews} avis
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {mockReviews.map((review, index) => (
+                <ReviewCard key={index} {...review} />
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Booking Card */}
@@ -203,4 +240,3 @@ export default function ListingDetailPage({ params }: ListingDetailPageProps) {
     </div>
   );
 }
-
