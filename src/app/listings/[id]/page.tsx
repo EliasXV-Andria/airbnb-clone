@@ -1,8 +1,12 @@
+'use client';
+
 import React from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import ReviewCard from '@/components/ui/ReviewCard';
 import FavoriteButton from '@/components/ui/FavoriteButton';
+import BookingModal from '@/components/ui/BookingModal';
 import Image from 'next/image';
 
 interface ListingDetailPageProps {
@@ -69,6 +73,8 @@ const mockReviews = [
 ];
 
 export default function ListingDetailPage({ params }: ListingDetailPageProps) {
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
   return (
     <div className="max-w-7xl mx-auto">
       {/* Header */}
@@ -212,7 +218,12 @@ export default function ListingDetailPage({ params }: ListingDetailPageProps) {
                 </div>
               </div>
 
-              <Button className="w-full mb-4">Réserver</Button>
+              <Button 
+                className="w-full mb-4"
+                onClick={() => setIsBookingModalOpen(true)}
+              >
+                Réserver
+              </Button>
 
               <div className="text-center text-sm text-gray-600">
                 Vous ne serez pas débité pour le moment
@@ -237,6 +248,17 @@ export default function ListingDetailPage({ params }: ListingDetailPageProps) {
           </Card>
         </div>
       </div>
+
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        listing={{
+          id: params.id,
+          title: mockListing.title,
+          price: mockListing.price,
+          images: mockListing.images
+        }}
+      />
     </div>
   );
 }

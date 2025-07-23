@@ -1,6 +1,10 @@
 import React from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import ListingCard from '@/components/ui/ListingCard';
+import MapView from '@/components/ui/MapView';
+import FilterModal from '@/components/ui/FilterModal';
+import { Filter, Map, List } from 'lucide-react';
 
 // Mock data for demonstration
 const mockSearchResults = [
@@ -61,17 +65,60 @@ const mockSearchResults = [
 ];
 
 export default function SearchPage() {
+  const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [appliedFilters, setAppliedFilters] = useState<any>({});
+
+  const handleApplyFilters = (filters: any) => {
+    setAppliedFilters(filters);
+    // Here you would typically call an API with the filters
+    console.log('Applied filters:', filters);
+  };
+
   return (
     <div className="max-w-7xl mx-auto">
       {/* Search Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">Résultats de recherche</h1>
-        <p className="text-gray-600">{mockSearchResults.length} logements trouvés</p>
+        <div className="flex justify-between items-center mb-4">
+          <div>
+            <h1 className="text-3xl font-bold">Résultats de recherche</h1>
+            <p className="text-gray-600">{mockSearchResults.length} logements trouvés</p>
+          </div>
+          <div className="flex space-x-2">
+            <Button
+              variant="outline"
+              onClick={() => setIsFilterModalOpen(true)}
+              className="flex items-center space-x-2"
+            >
+              <Filter className="h-4 w-4" />
+              <span>Filtres</span>
+            </Button>
+            <div className="flex border rounded-lg">
+              <Button
+                variant={viewMode === 'list' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('list')}
+                className="rounded-r-none"
+              >
+                <List className="h-4 w-4" />
+              </Button>
+              <Button
+                variant={viewMode === 'map' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('map')}
+                className="rounded-l-none"
+              >
+                <Map className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      {viewMode === 'list' ? (
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Filters Sidebar */}
-        <div className="lg:col-span-1">
+          <div className="lg:col-span-1">
           <div className="sticky top-4 space-y-6">
             {/* Price Filter */}
             <div className="border rounded-lg p-4">
@@ -126,10 +173,10 @@ export default function SearchPage() {
 
             <Button className="w-full">Appliquer les filtres</Button>
           </div>
-        </div>
+          </div>
 
         {/* Results Grid */}
-        <div className="lg:col-span-3">
+          <div className="lg:col-span-3">
           {/* Sort Options */}
           <div className="flex justify-between items-center mb-6">
             <span className="text-gray-600">{mockSearchResults.length} logements</span>
@@ -159,8 +206,48 @@ export default function SearchPage() {
               <Button variant="outline">Suivant</Button>
             </div>
           </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[600px]">
+          {/* Map View */}
+          <div className="order-2 lg:order-1">
+            <MapView listings={mockSearchResults} className="h-full" />
+          </div>
+          
+          {/* Listings Sidebar */}
+          <div className="order-1 lg:order-2 overflow-y-auto">
+            <div className="space-y-4">
+              {mockSearchResults.map((listing) => (
+                <div key={listing.id} className="flex space-x-4 p-4 border rounded-lg hover:shadow-md transition-shadow">
+                  <div className="relative w-32 h-24 flex-shrink-0">
+                    <img
+                      src={listing.images[0]}
+                      alt={listing.title}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-sm mb-1">{listing.title}</h3>
+                    <p className="text-gray-600 text-xs mb-1">{listing.location}</p>
+                    <p className="text-gray-600 text-xs mb-2">{listing.type}</p>
+                    <div className="flex justify-between items-center">
+                      <span className="font-semibold text-sm">{listing.price}€/nuit</span>
+                      <span className="text-xs">⭐ {listing.rating}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <FilterModal
+        isOpen={isFilterModalOpen}
+        onClose={() => setIsFilterModalOpen(false)}
+        onApplyFilters={handleApplyFilters}
+      />
     </div>
   );
 }
